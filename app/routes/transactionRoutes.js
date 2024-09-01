@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const Transaction = require('../Transaction');
+const Transaction = require('../models/Transaction');
 
 // @route   POST /api/transactions
 // @desc    Create a new transaction

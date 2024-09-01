@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const transactionRoutes = require("./app/models/routes/transactionRoutes");
+const transactionRoutes = require("./app/routes/transactionRoutes");
 
 // Connect to MongoDB
 const PORT = process.env.PORT || 5000;
