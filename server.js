@@ -25,7 +25,7 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // Routes
-app.use("/api/transactions", transactionRoutes);
+app.use("/transactions", transactionRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello, MERN Stack!");
