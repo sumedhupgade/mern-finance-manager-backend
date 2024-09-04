@@ -10,8 +10,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const transactionRoutes = require("./app/routes/transactionRoutes");
-
 // Connect to MongoDB
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
@@ -25,11 +23,9 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // Routes
-app.use("/transactions", transactionRoutes);
+app.use("/transactions", require("./api/controllers/transactionRoutes"));
+app.use("/auth", require("./api/controllers/authRoutes"));
 
-app.get("/", (req, res) => {
-  res.send("Hello, MERN Stack!");
-});
 
 // Start the server
 app.listen(PORT, () => {

@@ -9,7 +9,6 @@ const transactionSchema = new mongoose.Schema({
     type: {
         type: String,
         required: [true, 'Transaction type is required'],
-        enum: ['income', 'expense','investment'],
     },
     amount: {
         type: Number,
@@ -17,9 +16,13 @@ const transactionSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: [true, 'Description is required'],
         trim: true,
-    }
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', // Reference the User model
+        required: true,
+      },
 })
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
