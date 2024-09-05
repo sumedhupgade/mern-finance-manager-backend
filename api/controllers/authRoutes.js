@@ -6,7 +6,6 @@ const User = require("../models/User");
 
 router.post("/signup", async (req, res) => {
   const { email, password, username } = req.body;
-  console.log(req.body)
   const user = await User.findOne({ email });
   if (user) {
     return res.status(400).json({ message: "User exists" });
@@ -17,9 +16,8 @@ router.post("/signup", async (req, res) => {
   const new_user = new User({ username, email, password: hashedPassword });
   await new_user.save();
   const token = jwt.sign({ id: new_user.id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
+    expiresIn: "24h",
   });
-  console.log(new_user);
   res.status(200).json({
     token,
     user: {
@@ -51,7 +49,6 @@ router.post("/login", async (req, res) => {
       user: { id: user._id, username: user.username, email: user.email },
     });
   } catch (error) {
-    console.error("Error during user login:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
