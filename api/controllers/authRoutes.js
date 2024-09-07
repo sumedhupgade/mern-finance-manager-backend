@@ -16,7 +16,7 @@ router.post("/signup", async (req, res) => {
   const new_user = new User({ username, email, password: hashedPassword });
   await new_user.save();
   const token = jwt.sign({ id: new_user.id }, process.env.JWT_SECRET, {
-    expiresIn: "24h",
+    // expiresIn: "24h",
   });
   res.status(200).json({
     token,
@@ -24,6 +24,7 @@ router.post("/signup", async (req, res) => {
       id: new_user.id,
       username: new_user.username,
       email: new_user.email,
+      last_logged_in: new Date(),
     },
   });
 });
@@ -42,11 +43,16 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "24h",
+      // expiresIn: "24h",
     });
     res.status(200).json({
       token,
-      user: { id: user._id, username: user.username, email: user.email },
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        last_logged_in: new Date(),
+      },
     });
   } catch (error) {
     res.status(500).json({ message: "Server error" });

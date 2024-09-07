@@ -15,7 +15,6 @@ router.get("/", authMiddleware, async (req, res) => {
         startDate = new Date(year, month - 1,1)
         endDate = new Date(year, month,0, 23, 59, 59)
         query.date = {$gte: startDate, $lte: endDate}
-        console.log(query);
     }
     const transactions = await Transaction.find(query).sort({ date: -1 });
     res.json(transactions);
