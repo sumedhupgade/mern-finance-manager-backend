@@ -23,8 +23,11 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // Routes
+app.use("/user", require("./api/controllers/userRoutes"));
 app.use("/transactions", require("./api/controllers/transactionRoutes"));
 app.use("/auth", require("./api/controllers/authRoutes"));
+app.use("/recurring-expenses", require("./api/controllers/recurringExpenseRoutes"));
+app.use("/debt", require("./api/controllers/debtRoutes"));
 
 
 // Start the server
